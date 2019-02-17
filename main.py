@@ -1,4 +1,5 @@
 import logging
+import json
 import socket
 from wallet import *
 
@@ -6,6 +7,8 @@ URLS = {
     '/': '/'
 }
 
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO, filename='service.log')
+logging.info("StartApp")
 
 def parse_request(data):
     parsed = data.split(' ')
@@ -55,10 +58,9 @@ def run_service():
         s.listen()
         while True:
             conn, addr = s.accept()
-            print('Server connected by', addr)
+            # logging.INFO('Server connected by ' + str(addr))
             data = conn.recv(1024)
-            # print(data.decode('utf-8'), '\n')
-            # print(data)
+            # logging.INFO(data.decode('utf-8'), '\n')
             response = generate_response(data.decode('utf-8'))
             conn.close()
 

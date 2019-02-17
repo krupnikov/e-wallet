@@ -1,4 +1,3 @@
-import json
 import _sqlite3
 
 N = 10

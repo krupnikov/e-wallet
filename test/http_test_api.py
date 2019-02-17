@@ -10,7 +10,7 @@ conn = http.client.HTTPConnection("localhost", 5000)
 
 conn.request("POST", "", body, headers)
 response = conn.getresponse()
-print(response.status, response.reason)
+print(response.status)
 
 data = response.read()
 print(data)
