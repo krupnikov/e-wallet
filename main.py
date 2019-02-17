@@ -4,7 +4,7 @@ import socket
 from wallet import *
 
 URLS = {
-    '/order': '/order'
+    '/': '/'
 }
 
 
@@ -17,7 +17,8 @@ def parse_request(data):
 
 def get_body(data):
     parsed = data.split('\r\n\r\n')
-    body = parsed[1]
+    body = json.loads(parsed[1])
+    print(body)
     return (body)
 
 
@@ -43,7 +44,7 @@ def generate_response(data):
     method, url = parse_request(data)
     body = get_body(data)
     headers, code = generate_headers(method, url)
-    json_loads(body)
+    main_job(body)
     return headers.encode()
 
 

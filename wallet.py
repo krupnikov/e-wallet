@@ -24,7 +24,7 @@ def check_money_stat(client):
 def update_money(sender, destination, order_sum):
     stat = check_money_stat(destination)
     if stat > N:
-        return print('Перевод нельзя выпольнить')
+        return print('Перевод нельзя выполнить')
     else:
         query("UPDATE WALLET SET money = money - {0} WHERE client = '{1}'".format(order_sum, sender))
         query("UPDATE WALLET SET money = money + {0} WHERE client = '{1}'".format(order_sum, destination))
@@ -37,27 +37,6 @@ def get_data(data):
     return sender, destination, order_sum
 
 
-def json_loads(data):
-    obj = dict()
-    data = data.replace('{', '')
-    data = data.replace('}', '')
-    data = data.replace('"', '')
-    data = data.replace('\'', '')
-    data = data.replace(' ', '')
-    l = data.split(',')
-
-    print(l)
-    # sender = obj['sender']
-    # destination = data['destination']
-    # sum = data['sum']
-    # return print(sender, destination, sum)
-    return obj
-
-
-def main():
-    data = {"sender": "user5", "destination": "user1", "sum": 3}
+def main_job(data):
     sender, destination, order_sum = get_data(data)
     update_money(sender, destination, order_sum)
-
-
-main()
